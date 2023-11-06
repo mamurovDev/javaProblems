@@ -5,7 +5,14 @@ class Main {
         Scanner scanner = new Scanner(System.in);
         int a = scanner.nextInt();
         int b = scanner.nextInt();
+
+        if (a * a <= b * b) {
+            System.out.println(a);;
+        } else {
+            System.out.println(b);;
+        }
         scanner.close();
-        System.out.println(Math.min(a, b));
     }
+
+
 }
