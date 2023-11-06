@@ -3,11 +3,9 @@ import java.util.Scanner;
 class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
-        int d = scanner.nextInt();
-
-        for (int i = 0; i <= d; i++){
-            System.out.println(i + " ");
-        }
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        scanner.close();
+        System.out.print(a == b);
     }
 }
