@@ -1,30 +1,34 @@
 import java.util.Scanner;
 
-class Main {
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
+        System.out.print("Enter a floating-point number: ");
+        double a = scanner.nextDouble();
 
-        public static int compareRectangles(double x1, double y1, double x2, double y2) {
-            double area1 = x1 * y1;
-            double area2 = x2 * y2;
+        String result;
 
-            if (area1 == area2) {
-                return 0; // The areas are equal
-            } else if (area1 > area2) {
-                return 1; // Rectangle 1 has a greater area
-            } else {
-                return -1; // Rectangle 2 has a greater area
-            }
+        if (a >= 0) {
+            result = formatResult(square(a));
+        } else {
+            result = formatResult(fourthPower(a));
         }
 
-        public static void main(String[] args) {
-            Scanner sc = new Scanner(System.in);
-            double x1 = sc.nextDouble(); // Replace with the actual values for rectangle 1
-            double y1 = sc.nextDouble();
-            double x2 = sc.nextDouble(); // Replace with the actual values for rectangle 2
-            double y2 = sc.nextDouble();
+        System.out.println(result);
+    }
 
-            int result = compareRectangles(x1, y1, x2, y2);
-            System.out.println(result);
-        }
+    public static double square(double number) {
+        return number * number;
+    }
 
+    public static double fourthPower(double number) {
+        double squared = number * number;
+        return squared * squared;
+    }
+
+    public static String formatResult(double result) {
+        String resultStr = String.format("%.3f", result);
+        return resultStr;
+    }
 }
