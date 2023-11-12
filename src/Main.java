@@ -5,14 +5,14 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int a = scanner.nextInt();
-        int b = scanner.nextInt();
+        int h = scanner.nextInt();
+        int m = scanner.nextInt();
 
-        if (a < b){
-            System.out.print(b + " " + a);
+        if ( (h >= 0  && h < 24) && (m < 60 && m >= 0)){
+            System.out.println(true);
         }
         else {
-            System.out.print(a + " " + b);
+            System.out.println(false);
         }
     }
 }
