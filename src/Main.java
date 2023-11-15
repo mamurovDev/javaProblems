@@ -5,18 +5,26 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int a = scanner.nextInt();
-        int b = scanner.nextInt();
-        int c = scanner.nextInt();
-        int d = scanner.nextInt();
+        float a = scanner.nextFloat();
+        float b = scanner.nextFloat();
+        float c = scanner.nextFloat();
+        float d = scanner.nextFloat();
 
-        System.out.println(findMax(findMin(a,b), findMin(c, d)));
 
+        double result = roundToThreeDecimals(findMax(d - a, d -b, d - c));
+        System.out.print(String.format("%.3f", result));
     }
-    public static int findMax(int a,  int b){
-        return a > b ? a : b;
-    };
-    public static int findMin(int a,  int b){
-        return a < b ? a : b;
+    private static double roundToThreeDecimals(double value) {
+        double scale = 1000;
+        return (double) ((int) (value * scale)) / scale;
+    }
+    public static double findMax(double a, double b, double c) {
+        if (a >= b && a >= c) {
+            return a;
+        } else if (b >= a && b >= c) {
+            return b;
+        } else {
+            return c;
+        }
     };
 }
