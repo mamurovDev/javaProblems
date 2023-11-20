@@ -1,23 +1,18 @@
-import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
-        long number = scanner.nextLong();
 
-        char mostSignificantDigit = findMostSignificantDigit(number);
+    public static int[] getResult(int a[], int k) {
+        int[] result = new int[k];
+        int count = 0;
 
-        System.out.println(mostSignificantDigit);
+        for (int i = 0; i < a.length && count < k; i++) {
+            if (a[i] > 0) {
+                result[count] = a[i];
+                count++;
+            }
+        }
 
-        scanner.close();
-    }
-
-    private static char findMostSignificantDigit(long number) {
-        String numberAsString = Long.toString(Math.abs(number));
-
-        char mostSignificantDigit = numberAsString.charAt(0);
-
-        return mostSignificantDigit;
+        return result;
     }
 }
