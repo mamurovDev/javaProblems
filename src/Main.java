@@ -2,21 +2,28 @@
 public class Main {
 
 
-    public static int[] getResult(int[] a) {
-        int negative = 0;
-        int zero = 0;
-        int positive = 0;
-        for (int i = 0; i < a.length; i++) {
-            if (a[i] > 0) {
-                positive++;
-            } else if (a[i] < 0) {
-                negative++;
-            } else {
-                zero++;
+    public static void swapMinAndMax(int[] a) {
+        if (a == null || a.length < 2) {
+            return;
+        }
+
+        int minIndex = 0;
+        for (int i = 1; i < a.length; i++) {
+            if (a[i] < a[minIndex]) {
+                minIndex = i;
             }
         }
 
-        return new int[] {negative, zero, positive};
+        int maxIndex = 0;
+        for (int i = 1; i < a.length; i++) {
+            if (a[i] > a[maxIndex]) {
+                maxIndex = i;
+            }
+        }
+
+        int temp = a[minIndex];
+        a[minIndex] = a[maxIndex];
+        a[maxIndex] = temp;
     }
 
 }
