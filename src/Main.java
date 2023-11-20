@@ -2,28 +2,16 @@
 public class Main {
 
 
-    public static void swapMinAndMax(int[] a) {
-        if (a == null || a.length < 2) {
-            return;
-        }
-
-        int minIndex = 0;
-        for (int i = 1; i < a.length; i++) {
-            if (a[i] < a[minIndex]) {
-                minIndex = i;
+    public static int[] getResult(int[] a) {
+        int[] b = new int[a.length];
+        for (int i = 0; i < a.length; i++){
+            if (a[i] > i){
+                b[i] = 1;
+            } else {
+                b[i] = 0;
             }
         }
-
-        int maxIndex = 0;
-        for (int i = 1; i < a.length; i++) {
-            if (a[i] > a[maxIndex]) {
-                maxIndex = i;
-            }
-        }
-
-        int temp = a[minIndex];
-        a[minIndex] = a[maxIndex];
-        a[maxIndex] = temp;
+        return b;
     }
 
 }
