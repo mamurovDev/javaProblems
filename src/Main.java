@@ -2,25 +2,32 @@
 public class Main {
 
     public static int getResult(int[] a) {
-       int sum = 0;
-       for (int i = 2; i < a.length; i++){
-           if (isPrime(i)){
-               sum += a[i];
-           }
-       }
-       return sum;
+       int k1 = findMax(a);
+       int k2 = findMin(a);
+       return  k1 + k2;
+
     }
 
-    public static boolean isPrime(int n) {
-        if (n < 2) {
-            return false;
-        }
-        for (int i = 2; i <= Math.sqrt(n); i++) {
-            if (n % i == 0) {
-                return false;
+    public static int findMax(int[] a){
+        int res = a[0];
+
+        for (int i = 2; i < a.length; i += 2){
+            if (a[i] > res){
+                res = a[i];
             }
         }
-        return true;
+
+        return res;
+    }
+
+    public static int findMin(int[] a){
+       int initial = a[a.length - 1];
+       for (int i = a.length -1 ; i >= 0; i -= 2){
+           if (a[i] < initial){
+               initial = a[i];
+           }
+       }
+       return initial;
     }
 
 }
