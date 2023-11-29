@@ -1,33 +1,27 @@
-import java.util.Arrays;
+import java.util.ArrayList;
+
 class Main {
 
-    /**
-     * @param a the given array, containing an even number of elements
-     * @return max(a[0] + a[n - 1], ..., a[n/2 - 1] + a[n/2])
-     */
-    public static void compress(int[] a) {
-        int n = a.length;
 
-        // Create a temporary array to store the compressed result
-        int[] result = new int[n];
 
-        // Initialize indices for even and odd positions in the result array
-        int evenIndex = 0;
-        int oddIndex = n / 2;
-
-        // Iterate through the original array and compress elements
-        for (int i = 0; i < n; i++) {
-            if (i % 2 == 0) {
-                // Even index, copy the element to the first half
-                result[evenIndex++] = a[i];
-            } else {
-                // Odd index, replace with zero in the second half
-                result[oddIndex++] = 0;
-            }
+    public static void sort(int[] a, int k) {
+        if (a == null || a.length <= 1 || k <= 0 || k >= a.length) {
+            // Invalid input, do nothing
+            return;
         }
 
-        // Copy the compressed result back to the original array
-        System.arraycopy(result, 0, a, 0, n);
+        for (int i = 0; i < k; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < a.length; j++) {
+                if (a[j] < a[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            // Swap the found minimum element with the first element
+            int temp = a[i];
+            a[i] = a[minIndex];
+            a[minIndex] = temp;
+        }
     }
 
 }
