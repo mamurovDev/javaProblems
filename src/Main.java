@@ -5,23 +5,22 @@ class Main {
 
 
     public static void sort(int[] a, int k) {
-        if (a == null || a.length <= 1 || k <= 0 || k >= a.length) {
-            // Invalid input, do nothing
-            return;
-        }
+        for (int i = 1; i <= k; i++) {
+            int currentValue = a[i];
+            int previousIndex = i - 1;
 
-        for (int i = 0; i < k; i++) {
-            int minIndex = i;
-            for (int j = i + 1; j < a.length; j++) {
-                if (a[j] < a[minIndex]) {
-                    minIndex = j;
-                }
+            while (previousIndex >= 0 && a[previousIndex] > currentValue) {
+                a[previousIndex + 1] = a[previousIndex];
+                previousIndex--;
             }
-            // Swap the found minimum element with the first element
-            int temp = a[i];
-            a[i] = a[minIndex];
-            a[minIndex] = temp;
+            a[previousIndex + 1] = currentValue;
         }
     }
 
+
 }
+
+
+
+
+
