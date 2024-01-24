@@ -1,20 +1,27 @@
 
+
+
 class Solution {
 
-
-    public static void main(String[] args) {
-        System.out.println(reverse("hello"));
-    }
-
-    public static String reverse(String str) {
+    public static String lastLongestWord(String text) {
+        String longest = "";
         //put your code here
-        String temp = "";
-        for (int i = str.length() - 1; i >= 0; i--) {
-            char ch = str.charAt(i);
-            temp = temp + ch;
+        String[] longest_word = text.split(" ");
+        if (longest_word.length == 1){
+            return longest_word[0];
         }
 
-        return temp;
+        for (int i = 0; i < longest_word.length - 1; i++) {
+            if (longest_word[i].length() > longest_word[i + 1].length()) {
+                longest = longest_word[i];
+            } else {
+                longest = longest_word[i + 1];
+            }
+        }
+        return longest;
     }
 
 }
+
+
+
