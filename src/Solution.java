@@ -1,30 +1,21 @@
 class Solution {
 
-    //    /** returns the number of digits in a string
-//     * @param str the given string
-//     * @return the number of digits in a string
+//    /** checks whether two strings are anagrams of each other
+//     * @param str1 the first string
+//     * @param str2 the second string
+//     * @return true if the strings are anagrams, and false otherwise
 //     */
+    public static boolean isAnagrams(String str1, String str2) {
+        //put your code here
+        String[] string1 = str1.split("");
+        String[] string2 = str2.split("");
+        if (string1.length != string2.length) return false;
 
-
-    public static boolean ifNumber(String a) {
-        for (int i = 0; i <= 9; i++) {
-            if (a.equals(i + "")) {
-                return true;
+        for (String s: string1){
+            if (!str2.contains(s)){
+                return false;
             }
         }
-
-        return false;
-    }
-
-    public static int countDigitsInString(String str) {
-        //put your code here
-        int totalNumber = 0;
-        String[] arr = str.split("");
-        for (String s : arr) {
-            if (ifNumber(s)) {
-                totalNumber++;
-            };
-        }
-        return totalNumber;
+        return true;
     }
 }
