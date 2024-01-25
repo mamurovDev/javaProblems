@@ -1,21 +1,22 @@
 class Solution {
-//    /** removes duplicate symbols in a string
-//     * @param str the given string
-//     * @return a string with duplicate characters removed
+//    /**
+//     * generates a sequence of numbers
+//     *
+//     * @param start initial value of the number
+//     * @param count number of numbers in sequence
+//     * @return generated sequence of numbers
 //     */
 
 
-
-
-    public static String removeDuplicateSymbols(String str) {
+    public static String generateNumberSequence(int start, int count) {
         //put your code here
-        StringBuilder finalValue = new StringBuilder();
-        String[] arr = str.split("");
-        for (int i = 0; i < arr.length; i++){
-            if (!finalValue.toString().contains(arr[i])){
-                finalValue.append(arr[i]);
-            }
+        if (count == 0) return "()";
+        StringBuilder str = new StringBuilder();
+        str.append(start);
+        for (int i = 1; i < count; i++) {
+            str.append(" ").append(i + start);
+
         }
-        return finalValue.toString();
+        return "(" + str.toString() + ")";
     }
 }
