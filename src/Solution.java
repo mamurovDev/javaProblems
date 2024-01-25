@@ -1,21 +1,21 @@
 class Solution {
-
-//    /** checks whether two strings are anagrams of each other
-//     * @param str1 the first string
-//     * @param str2 the second string
-//     * @return true if the strings are anagrams, and false otherwise
+//    /** removes duplicate symbols in a string
+//     * @param str the given string
+//     * @return a string with duplicate characters removed
 //     */
-    public static boolean isAnagrams(String str1, String str2) {
-        //put your code here
-        String[] string1 = str1.split("");
-        String[] string2 = str2.split("");
-        if (string1.length != string2.length) return false;
 
-        for (String s: string1){
-            if (!str2.contains(s)){
-                return false;
+
+
+
+    public static String removeDuplicateSymbols(String str) {
+        //put your code here
+        StringBuilder finalValue = new StringBuilder();
+        String[] arr = str.split("");
+        for (int i = 0; i < arr.length; i++){
+            if (!finalValue.toString().contains(arr[i])){
+                finalValue.append(arr[i]);
             }
         }
-        return true;
+        return finalValue.toString();
     }
 }
