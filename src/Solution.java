@@ -1,22 +1,22 @@
-class Solution {
-//    /**
-//     * generates a sequence of numbers
-//     *
-//     * @param start initial value of the number
-//     * @param count number of numbers in sequence
-//     * @return generated sequence of numbers
-//     */
+public class Solution {
 
+    public static String reverseWordOrder(String input) {
+        String[] arr = input.split(" ");
+        int count = arr.length - 1;
 
-    public static String generateNumberSequence(int start, int count) {
-        //put your code here
-        if (count == 0) return "()";
-        StringBuilder str = new StringBuilder();
-        str.append(start);
-        for (int i = 1; i < count; i++) {
-            str.append(" ").append(i + start);
-
+        for (int i = 0; i < arr.length / 2; i++) {
+            String temp = arr[i];
+            arr[i] = arr[count - i];
+            arr[count - i] = temp;
         }
-        return "(" + str.toString() + ")";
+
+        StringBuilder str = new StringBuilder();
+        for (String s : arr) {
+            str.append(s).append(" ");
+        }
+
+        return str.toString().trim();
     }
+
+
 }
