@@ -1,40 +1,27 @@
 class Demo {
-    public static int sum(int[] array, int fromIndex, int toIndex) {
-        if (array == null) {
-            throw new IllegalArgumentException("Array is null");
-        }
 
-        if (fromIndex < 0) {
-            throw new ArrayIndexOutOfBoundsException("fromIndex < 0: " + fromIndex);
+    public static int resistance(int voltage, int current) {
+        if (current == 0) {
+            throw new ArithmeticException("Resistance is infinite: voltage = " + voltage + ", current = " + current);
         }
-
-        if (toIndex >= array.length) {
-            throw new ArrayIndexOutOfBoundsException("toIndex >= array.length: " + toIndex);
-        }
-
-        if (fromIndex > toIndex) {
-            throw new IllegalArgumentException("fromIndex > toIndex: " + fromIndex + " > " + toIndex);
-        }
-
-        int sum = 0;
-        for (int i = fromIndex; i <= toIndex; i++) {
-            sum += array[i];
-        }
-
-        return sum;
+        return voltage / current;
     }
 
     public static void main(String[] args) {
-        // Example usage
-        int[] array = {5, 10, 15, 5};
-        int fromIndex = 0;
-        int toIndex = 2;
+        for (String arg : args) {
+            String[] pair = arg.split(",");
 
-        try {
-            int result = sum(array, fromIndex, toIndex);
-            System.out.println(result);
-        } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
-            System.out.println(e.getMessage());
+            try {
+                int voltage = Integer.parseInt(pair[0]);
+                int current = Integer.parseInt(pair[1]);
+
+                int calculatedResistance = resistance(voltage, current);
+                System.out.println(calculatedResistance);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input format for pair: " + arg);
+            } catch (ArithmeticException e) {
+                System.out.println( e.getMessage());
+            }
         }
     }
 }
