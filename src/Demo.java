@@ -4,7 +4,7 @@ class Demo {
 
 
     public static boolean isPrime(int n) {
-        if (n < 1) {
+        if (n < 0) {
             throw new IllegalArgumentException(n + " is not a natural number");
         }
 
