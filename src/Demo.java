@@ -1,40 +1,30 @@
-class Student {
-    private String name;
+class Thermometer {
+    private final int temperature;
 
-    public String getName() {
-        return name;
-    }
-
-    public boolean isAlpha(String name) {
-        return name.matches("[a-zA-Z]+");
-    }
-
-    public void setName(String newName) {
-        if (newName == null || newName.isEmpty() ||
-                newName.charAt(0) != newName.toUpperCase().charAt(0) ||
-                !isAlpha(newName)) {
-            throw new IllegalArgumentException("Invalid student name");
-        } else {
-            this.name = newName;
+    public Thermometer(String initTemperature) {
+        try {
+            this.temperature = Integer.parseInt(initTemperature);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException(initTemperature + " is not an integer");
         }
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(temperature);
     }
 }
 
 class Demo {
     public static void main(String[] args) {
-        // Creating a new Student object
-        Student student = new Student();
-
-        for (int i = 0; i < args.length; i++) {
+        for (String arg : args) {
             try {
-                // Invoking the setName method for each command-line parameter
-                student.setName(args[i]);
-
-                // Displaying the result returned by the getName method
-                System.out.println(student.getName());
-            } catch (IllegalArgumentException e) {
-                // Handling the case where setName method throws an IllegalArgumentException
-                System.out.println("Invalid student name");
+                // Creating and displaying a thermometer object for each command-line parameter
+                Thermometer thermometer = new Thermometer(arg);
+                System.out.println(thermometer);
+            } catch (NumberFormatException e) {
+                // Displaying an exception message if the object cannot be created
+                System.out.println(e.getMessage());
             }
         }
     }
