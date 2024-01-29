@@ -1,27 +1,50 @@
-class Demo {
+class InsufficientFundsException extends Exception {
+    public InsufficientFundsException(int amount) {
+        super("Insufficient funds to withdraw $" + amount);
+    }
+}
 
-    public static int resistance(int voltage, int current) {
-        if (current == 0) {
-            throw new ArithmeticException("Resistance is infinite: voltage = " + voltage + ", current = " + current);
+class NegativeAmountException extends RuntimeException {
+    public NegativeAmountException(String message) {
+        super(message);
+    }
+}
+
+class BankAccount {
+    private String accountHolder;
+    private int balance;
+
+    public BankAccount(String accountHolder, int initialBalance) {
+        if (initialBalance < 0) {
+            throw new NegativeAmountException("Initial balance cannot be negative");
         }
-        return voltage / current;
+        this.accountHolder = accountHolder;
+        this.balance = initialBalance;
     }
 
-    public static void main(String[] args) {
-        for (String arg : args) {
-            String[] pair = arg.split(",");
-
-            try {
-                int voltage = Integer.parseInt(pair[0]);
-                int current = Integer.parseInt(pair[1]);
-
-                int calculatedResistance = resistance(voltage, current);
-                System.out.println(calculatedResistance);
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input format for pair: " + arg);
-            } catch (ArithmeticException e) {
-                System.out.println( e.getMessage());
-            }
+    public void deposit(int amount) {
+        if (amount < 0) {
+            throw new NegativeAmountException("Deposit amount cannot be negative");
         }
+        balance += amount;
+    }
+
+    public void withdraw(int amount) throws InsufficientFundsException {
+        if (amount < 0) {
+            throw new NegativeAmountException("Withdrawal amount cannot be negative");
+        }
+        if (amount > balance) {
+            throw new InsufficientFundsException(amount);
+        }
+        balance -= amount;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    @Override
+    public String toString() {
+        return accountHolder + ": " + balance;
     }
 }
