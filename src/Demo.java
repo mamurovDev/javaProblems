@@ -1,31 +1,40 @@
-class Thermometer {
-    private final int temperature;
-
-    public Thermometer(String initTemperature) {
-        try {
-            this.temperature = Integer.parseInt(initTemperature);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException(initTemperature + " is not an integer");
-        }
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(temperature);
-    }
-}
-
 class Demo {
+    public static int sum(int[] array, int fromIndex, int toIndex) {
+        if (array == null) {
+            throw new IllegalArgumentException("Array is null");
+        }
+
+        if (fromIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException("fromIndex < 0: " + fromIndex);
+        }
+
+        if (toIndex >= array.length) {
+            throw new ArrayIndexOutOfBoundsException("toIndex >= array.length: " + toIndex);
+        }
+
+        if (fromIndex > toIndex) {
+            throw new IllegalArgumentException("fromIndex > toIndex: " + fromIndex + " > " + toIndex);
+        }
+
+        int sum = 0;
+        for (int i = fromIndex; i <= toIndex; i++) {
+            sum += array[i];
+        }
+
+        return sum;
+    }
+
     public static void main(String[] args) {
-        for (String arg : args) {
-            try {
-                // Creating and displaying a thermometer object for each command-line parameter
-                Thermometer thermometer = new Thermometer(arg);
-                System.out.println(thermometer);
-            } catch (NumberFormatException e) {
-                // Displaying an exception message if the object cannot be created
-                System.out.println(e.getMessage());
-            }
+        // Example usage
+        int[] array = {5, 10, 15, 5};
+        int fromIndex = 0;
+        int toIndex = 2;
+
+        try {
+            int result = sum(array, fromIndex, toIndex);
+            System.out.println(result);
+        } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
