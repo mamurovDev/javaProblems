@@ -1,30 +1,41 @@
-import java.util.Scanner;
+class Student {
+    private String name;
 
-class Demo {
-
-
-    public static boolean isPrime(int n) {
-        if (n < 0) {
-            throw new IllegalArgumentException(n + " is not a natural number");
-        }
-
-        if (n <= 1) {
-            return false;
-        }
-        for (int i = 2; i <= n / 2; i++) {
-            if ((n % i) == 0)
-                return false;
-        }
-        return true;
+    public String getName() {
+        return name;
     }
 
+    public boolean isAlpha(String name) {
+        return name.matches("[a-zA-Z]+");
+    }
+
+    public void setName(String newName) {
+        if (newName == null || newName.isEmpty() ||
+                newName.charAt(0) != newName.toUpperCase().charAt(0) ||
+                !isAlpha(newName)) {
+            throw new IllegalArgumentException("Invalid student name");
+        } else {
+            this.name = newName;
+        }
+    }
+}
+
+class Demo {
     public static void main(String[] args) {
-//        for (String arg : args) {
-//            // TODO: Delete line below and write your own solution.
-//            System.out.println("Not implemented");
-//        }
-        Scanner sc = new Scanner(System.in);
-        System.out.println(isPrime(sc.nextInt()));
-        sc.close();
+        // Creating a new Student object
+        Student student = new Student();
+
+        for (int i = 0; i < args.length; i++) {
+            try {
+                // Invoking the setName method for each command-line parameter
+                student.setName(args[i]);
+
+                // Displaying the result returned by the getName method
+                System.out.println(student.getName());
+            } catch (IllegalArgumentException e) {
+                // Handling the case where setName method throws an IllegalArgumentException
+                System.out.println("Invalid student name");
+            }
+        }
     }
 }
