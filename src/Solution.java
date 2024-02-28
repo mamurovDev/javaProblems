@@ -1,21 +1,52 @@
 
+// class Solution {
+
+//     /**
+//      * calculates the average value of two Integers
+//      * 
+//      * @param number1 the first value of the Integer type
+//      * @param number2 the second value of the Integer type
+//      * @return the average value of the type Double, or null otherwise
+//      */
+//     public static Double calculateAverage(Integer number1, Integer number2) {
+//         // put your code here
+//         if (number1 instanceof Integer && number2 instanceof Integer) {
+//             Double arg = Double.valueOf(((double) number1 + number2) / 2);
+//             return arg;
+//         } else {
+//             return null;
+//         }
+//         // exclusively a stub for the first test
+//     }
+// }
+
+
 class Solution {
 
     /**
-     * calculates the average value of two Integers
+     * converts a string to an array of numbers
      * 
-     * @param number1 the first value of the Integer type
-     * @param number2 the second value of the Integer type
-     * @return the average value of the type Double, or null otherwise
+     * @param line a string of integers and real numbers separated by a space
+     * @return an array of numbers, or null otherwise
      */
-    public static Double calculateAverage(Integer number1, Integer number2) {
+    public static Number[] convertString2Numbers(String line) {
         // put your code here
-        if (number1 instanceof Integer && number2 instanceof Integer) {
-            Double arg = Double.valueOf(((double) number1 + number2) / 2);
-            return arg;
-        } else {
-            return null;
+        String[] strList = line.split(" ");
+        Number[] nums = new Number[strList.length];
+        for (int i = 0; i < nums.length; i++) {
+            try {
+                nums[i] = Integer.parseInt(strList[i]);
+
+            } catch (Exception e) {
+                try {
+                    nums[i] = Double.parseDouble(strList[i]);
+                } catch (Exception ex) {
+                    // TODO: handle exception
+                    // TODO: handle exception
+                    nums[i] = null;
+                }
+            }
         }
-        // exclusively a stub for the first test
+        return nums; // exclusively a stub for the first test
     }
 }
