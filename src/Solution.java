@@ -79,23 +79,47 @@
 
 
 
+// class Solution {
+
+//     /**
+//      * compares two values of the Double type
+//      * 
+//      * @param value1 the first value of the Double type
+//      * @param value2 the second value of the Double type
+//      * @return "less" if value1 < value2, or "more" if value1 > value2, or "equal"
+//      *         otherwise
+//      */
+//     public static String compareDouble(Double value1, Double value2) {
+//         // put your code here
+//         if (value1 < value2) {
+//             return "less";
+//         } else if (value1 > value2) {
+//             return "more";
+//         } else
+//             return "equal";
+//     }
+// }
+
+
+
+
 class Solution {
 
     /**
-     * compares two values of the Double type
+     * counts the number of uppercase characters
      * 
-     * @param value1 the first value of the Double type
-     * @param value2 the second value of the Double type
-     * @return "less" if value1 < value2, or "more" if value1 > value2, or "equal"
-     *         otherwise
+     * @param str the given string
+     * @return the number of uppercase characters
      */
-    public static String compareDouble(Double value1, Double value2) {
+    public static Integer countUpperCase(String str) {
         // put your code here
-        if (value1 < value2) {
-            return "less";
-        } else if (value1 > value2) {
-            return "more";
-        } else
-            return "equal";
+        Integer total = 0;
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (Character.isUpperCase(ch)) {
+                total++;
+            }
+        }
+        return total;
     }
 }
