@@ -20,33 +20,58 @@
 //     }
 // }
 
+// class Solution {
+
+//     /**
+//      * converts a string to an array of numbers
+//      * 
+//      * @param line a string of integers and real numbers separated by a space
+//      * @return an array of numbers, or null otherwise
+//      */
+//     public static Number[] convertString2Numbers(String line) {
+//         // put your code here
+//         String[] strList = line.split(" ");
+//         Number[] nums = new Number[strList.length];
+//         for (int i = 0; i < nums.length; i++) {
+//             try {
+//                 nums[i] = Integer.parseInt(strList[i]);
+
+//             } catch (Exception e) {
+//                 try {
+//                     nums[i] = Double.parseDouble(strList[i]);
+//                 } catch (Exception ex) {
+//                     // TODO: handle exception
+//                     nums[i] = null;
+//                 }
+//             }
+//         }
+//         return nums; // exclusively a stub for the first test
+//     }
+// }
+
+
+
 
 class Solution {
 
     /**
-     * converts a string to an array of numbers
+     * calculates the average of the real numbers in an array of integers and real
+     * numbers
      * 
-     * @param line a string of integers and real numbers separated by a space
-     * @return an array of numbers, or null otherwise
+     * @param numbers an array of integers and real numbers
+     * @return the average of the real numbers, or null otherwise
      */
-    public static Number[] convertString2Numbers(String line) {
-        // put your code here
-        String[] strList = line.split(" ");
-        Number[] nums = new Number[strList.length];
-        for (int i = 0; i < nums.length; i++) {
-            try {
-                nums[i] = Integer.parseInt(strList[i]);
-
-            } catch (Exception e) {
-                try {
-                    nums[i] = Double.parseDouble(strList[i]);
-                } catch (Exception ex) {
-                    // TODO: handle exception
-                    // TODO: handle exception
-                    nums[i] = null;
-                }
+    public static Double calculateAverageDoubles(Number numbers[]) {
+        double sum = 0;
+        int divisor = 0;
+        
+        for (Number q : numbers) {
+            if (q instanceof Double) {
+                sum += q.doubleValue();
+                divisor++;
             }
         }
-        return nums; // exclusively a stub for the first test
+        
+        return divisor == 0 ? null : (sum / divisor);
     }
 }
