@@ -103,23 +103,51 @@
 
 
 
+// class Solution {
+
+//     /**
+//      * counts the number of uppercase characters
+//      * 
+//      * @param str the given string
+//      * @return the number of uppercase characters
+//      */
+//     public static Integer countUpperCase(String str) {
+//         // put your code here
+//         Integer total = 0;
+//         for (int i = 0; i < str.length(); i++) {
+//             char ch = str.charAt(i);
+//             if (Character.isUpperCase(ch)) {
+//                 total++;
+//             }
+//         }
+//         return total;
+//     }
+// }
+
+
+import java.math.BigInteger;
 class Solution {
 
     /**
-     * counts the number of uppercase characters
+     * calculates the factorial of a number
      * 
-     * @param str the given string
-     * @return the number of uppercase characters
+     * @param n a natural number
+     * @return the factorial of a natural number, or otherwise the "Invalid
+     *         parameter"
      */
-    public static Integer countUpperCase(String str) {
+    public static String calculateFactorial(String n) {
         // put your code here
-        Integer total = 0;
-        for (int i = 0; i < str.length(); i++) {
-            char ch = str.charAt(i);
-            if (Character.isUpperCase(ch)) {
-                total++;
+        Integer in = Integer.parseInt(n);
+        BigInteger factorial = BigInteger.ONE;
+        if (in < 0) {
+            return "Invalid parameter";
+        } else if (in == 0) {
+            return "1";
+        } else {
+            for (int i = 1; i <= in; i++) {
+                factorial = factorial.multiply(BigInteger.valueOf(i));
             }
         }
-        return total;
+        return factorial.toString(); // exclusively a stub for the first test
     }
 }
