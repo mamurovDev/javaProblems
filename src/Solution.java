@@ -52,26 +52,50 @@
 
 
 
+// class Solution {
+
+//     /**
+//      * calculates the average of the real numbers in an array of integers and real
+//      * numbers
+//      * 
+//      * @param numbers an array of integers and real numbers
+//      * @return the average of the real numbers, or null otherwise
+//      */
+//     public static Double calculateAverageDoubles(Number numbers[]) {
+//         double sum = 0;
+//         int divisor = 0;
+        
+//         for (Number q : numbers) {
+//             if (q instanceof Double) {
+//                 sum += q.doubleValue();
+//                 divisor++;
+//             }
+//         }
+        
+//         return divisor == 0 ? null : (sum / divisor);
+//     }
+// }
+
+
+
+
 class Solution {
 
     /**
-     * calculates the average of the real numbers in an array of integers and real
-     * numbers
+     * compares two values of the Double type
      * 
-     * @param numbers an array of integers and real numbers
-     * @return the average of the real numbers, or null otherwise
+     * @param value1 the first value of the Double type
+     * @param value2 the second value of the Double type
+     * @return "less" if value1 < value2, or "more" if value1 > value2, or "equal"
+     *         otherwise
      */
-    public static Double calculateAverageDoubles(Number numbers[]) {
-        double sum = 0;
-        int divisor = 0;
-        
-        for (Number q : numbers) {
-            if (q instanceof Double) {
-                sum += q.doubleValue();
-                divisor++;
-            }
-        }
-        
-        return divisor == 0 ? null : (sum / divisor);
+    public static String compareDouble(Double value1, Double value2) {
+        // put your code here
+        if (value1 < value2) {
+            return "less";
+        } else if (value1 > value2) {
+            return "more";
+        } else
+            return "equal";
     }
 }
