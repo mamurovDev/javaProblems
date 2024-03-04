@@ -173,33 +173,85 @@
 //         return fib;
 //     }
 // }
+
+// import java.util.Scanner;
+
+// class Pair<A, B> {
+
+//   private A a;
+//   private B b;
+
+//   public Pair(A a, B b) {
+//     this.a = a;
+//     this.b = b;
+//   }
+
+//   @Override
+//   public String toString() {
+//     return "Pair [a=" + a + ", b=" + b + "]";
+//   }
+// }
+
+// public class Solution {
+
+//   public static Pair<?, ?> getPair(Scanner sc) {
+//     if (sc.hasNextInt()) {
+//       int first = sc.nextInt();
+//       if (sc.hasNextInt()) {
+//         int second = sc.nextInt();
+//         return new Pair<>(first, second);
+//       } else {
+//         String second = sc.next();
+//         return new Pair<>(first, second);
+//       }
+//     } else {
+//       String first = sc.next();
+//       if (sc.hasNextInt()) {
+//         int second = sc.nextInt();
+//         return new Pair<>(first, second);
+//       } else {
+//         String second = sc.next();
+//         return new Pair<>(first, second);
+//       }
+//     }
+//   }
+// }
+
 import java.util.Scanner;
 
-class Pair<A, B> {
-    private A a;
-    private B b;
+//Declare a generic class Mark with a bounded type parameter T
+class Mark<T extends Number> {
 
-    public Pair(A a, B b) {
-        this.a = a;
-        this.b = b;
-    }
+  //Declare a class constant PASS_GRADE
+  final int PASS_GRADE = 4;
+  //Declare an instance class constant grade
+  final T grade;
 
-    @Override
-    public String toString() {
-        return "Pair [a=" + a + ", b=" + b + "]";
-    }
+  //Declare a constructor
+  public Mark(T grade) {
+    this.grade = grade;
+  }
+
+  //Declare a boolean method isPassed()
+  public boolean isPassed() {
+    return this.PASS_GRADE <= this.grade.doubleValue();
+  }
 }
 
-public class Solution {
-    public static Pair<?, ?> getPair(Scanner sc) {
-        if (sc.hasNextInt()) {
-            int first = sc.nextInt();
-            int second = sc.nextInt();
-            return new Pair<>(first, second);
-        } else {
-            String first = sc.next();
-            String second = sc.next();
-            return new Pair<>(first, second);
-        }
+class Solution {
+
+  //put the method getMark(Scanner sc) here
+  public static Mark<? extends Number> getMark(Scanner sc) {
+    if (sc.hasNextInt()) {
+      int gr = sc.nextInt();
+      Mark<Integer> mark = new Mark<>(gr);
+      return mark;
+    } else if (sc.hasNextDouble()) {
+      double gr = sc.nextDouble();
+      Mark<Double> mark = new Mark<>(gr);
+      return mark;
+    } else {
+      throw new IllegalArgumentException();
     }
+  }
 }
