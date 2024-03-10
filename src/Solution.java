@@ -217,41 +217,139 @@
 //   }
 // }
 
+// import java.util.Scanner;
+
+// //Declare a generic class Mark with a bounded type parameter T
+// class Mark<T extends Number> {
+
+//   //Declare a class constant PASS_GRADE
+//   final int PASS_GRADE = 4;
+//   //Declare an instance class constant grade
+//   final T grade;
+
+//   //Declare a constructor
+//   public Mark(T grade) {
+//     this.grade = grade;
+//   }
+
+//   //Declare a boolean method isPassed()
+//   public boolean isPassed() {
+//     return this.PASS_GRADE <= this.grade.doubleValue();
+//   }
+// }
+
+// class Solution {
+
+//   //put the method getMark(Scanner sc) here
+//   public static Mark<? extends Number> getMark(Scanner sc) {
+//     if (sc.hasNextInt()) {
+//       int gr = sc.nextInt();
+//       Mark<Integer> mark = new Mark<>(gr);
+//       return mark;
+//     } else if (sc.hasNextDouble()) {
+//       double gr = sc.nextDouble();
+//       Mark<Double> mark = new Mark<>(gr);
+//       return mark;
+//     } else {
+//       throw new IllegalArgumentException();
+//     }
+//   }
+// }
+
 import java.util.Scanner;
 
-//Declare a generic class Mark with a bounded type parameter T
-class Mark<T extends Number> {
+//declare a parameterized interface Higher
+interface Higher<T> {
+  boolean isHigher(T other);
+}
 
-  //Declare a class constant PASS_GRADE
-  final int PASS_GRADE = 4;
-  //Declare an instance class constant grade
-  final T grade;
+//update the class header
+class Product implements Higher<Product> {
 
-  //Declare a constructor
-  public Mark(T grade) {
-    this.grade = grade;
+  private final String name;
+  private final int price;
+
+  public Product(String name, int price) {
+    super();
+    this.name = name;
+    this.price = price;
   }
 
-  //Declare a boolean method isPassed()
-  public boolean isPassed() {
-    return this.PASS_GRADE <= this.grade.doubleValue();
+  public Product(Scanner sc) {
+    name = sc.next();
+    price = sc.nextInt();
+  }
+
+  public int getPrice() {
+    return price;
+  }
+
+  @Override
+  public boolean isHigher(Product product) {
+    return name.compareTo(product.name) < 0;
+  }
+
+  @Override
+  public String toString() {
+    return "Product [name=" + name + ", price=" + price + "]";
+  }
+}
+
+//update the class header
+class Purchase implements Higher<Purchase> {
+
+  private final Product product;
+  private final int number;
+
+  public Purchase(Product product, int number) {
+    super();
+    this.product = product;
+    this.number = number;
+  }
+
+  public Purchase(Scanner sc) {
+    product = new Product(sc);
+    number = sc.nextInt();
+  }
+
+  public int getCost() {
+    return product.getPrice() * number;
+  }
+
+  @Override
+  public boolean isHigher(Purchase purchase) {
+    return getCost() > purchase.getCost();
+  }
+
+  @Override
+  public String toString() {
+    return (
+      "Purchase [product=" +
+      product +
+      ", number=" +
+      number +
+      ", getCost()=" +
+      getCost() +
+      "]"
+    );
   }
 }
 
 class Solution {
 
-  //put the method getMark(Scanner sc) here
-  public static Mark<? extends Number> getMark(Scanner sc) {
-    if (sc.hasNextInt()) {
-      int gr = sc.nextInt();
-      Mark<Integer> mark = new Mark<>(gr);
-      return mark;
-    } else if (sc.hasNextDouble()) {
-      double gr = sc.nextDouble();
-      Mark<Double> mark = new Mark<>(gr);
-      return mark;
-    } else {
+  //declare a static method getHighest
+  //that accepts an array of objects of the type parameter T
+  //and returns the highest element of the array.
+  public static <T extends Higher<T>> T getHighest(T[] array) {
+    if (array.length == 0) {
       throw new IllegalArgumentException();
     }
+    T highest = array[0];
+    for (int i = 1; i < array.length; i++) {
+      if (array[i].isHigher(highest)) {
+        highest = array[i];
+      }
+    }
+    return highest;
   }
 }
