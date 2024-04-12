@@ -421,49 +421,92 @@
 // 	}
 
 // }
-import java.util.HashMap;
-import java.util.Map;
+// import java.util.HashMap;
+// import java.util.Map;
 
-class Solution {
+// class Solution {
+//     /**
+//      * @param a the first number.
+//      * @param b the second number.
+//      * @return the least common multiple of two given numbers
+//      */
+//     public static int findLcm(int a, int b) {
+//         return calculateLCM(a, b);
+//     }
+
+//     private static int calculateLCM(int a, int b) {
+//         Map<Integer, Integer> primeFactorsA = primeFactorization(a);
+//         Map<Integer, Integer> primeFactorsB = primeFactorization(b);
+
+//         // Union of prime factors
+//         Map<Integer, Integer> combinedFactors = new HashMap<>(primeFactorsA);
+//         primeFactorsB.forEach((factor, exponent) ->
+//                 combinedFactors.merge(factor, exponent, Math::max));
+
+//         // Calculate LCM
+//         int lcm = 1;
+//         for (Map.Entry<Integer, Integer> entry : combinedFactors.entrySet()) {
+//             int factor = entry.getKey();
+//             int exponent = entry.getValue();
+//             lcm *= Math.pow(factor, exponent);
+//         }
+//         return lcm;
+//     }
+
+//     private static Map<Integer, Integer> primeFactorization(int n) {
+//         Map<Integer, Integer> factors = new HashMap<>();
+//         for (int i = 2; i * i <= n; i++) {
+//             while (n % i == 0) {
+//                 factors.put(i, factors.getOrDefault(i, 0) + 1);
+//                 n /= i;
+//             }
+//         }
+//         if (n > 1) {
+//             factors.put(n, factors.getOrDefault(n, 0) + 1);
+//         }
+//         return factors;
+//     }
+// }
+
+
+
+class Triple {
+
+    //d = gcd(a, b) = a * x + b * y
+    int d;
+    int x;
+    int y;
+  
+    public Triple(int d, int x, int y) {
+      this.d = d;
+      this.x = x;
+      this.y = y;
+    }
+  
+    @Override
+    public String toString() {
+      return String.format("(%d, %d, %d)", d, x, y);
+    }
+  }
+  
+  class Solution {
     /**
      * @param a the first number.
      * @param b the second number.
-     * @return the least common multiple of two given numbers
+     * @return a Triple instance: gcd and coefficients of the expression gcd(a, b) = a * x + b * y
      */
-    public static int findLcm(int a, int b) {
-        return calculateLCM(a, b);
+    public static Triple extendedEuclid(int a, int b) {
+      if (b == 0) {
+        return new Triple(a, 1, 0);
+      } else {
+        Triple result = extendedEuclid(b, a % b);
+        int gcd = result.d;
+        int xPrime = result.x;
+        int yPrime = result.y;
+        int x = yPrime;
+        int y = xPrime - (a / b) * yPrime;
+        return new Triple(gcd, x, y);
+      }
     }
-
-    private static int calculateLCM(int a, int b) {
-        Map<Integer, Integer> primeFactorsA = primeFactorization(a);
-        Map<Integer, Integer> primeFactorsB = primeFactorization(b);
-
-        // Union of prime factors
-        Map<Integer, Integer> combinedFactors = new HashMap<>(primeFactorsA);
-        primeFactorsB.forEach((factor, exponent) ->
-                combinedFactors.merge(factor, exponent, Math::max));
-
-        // Calculate LCM
-        int lcm = 1;
-        for (Map.Entry<Integer, Integer> entry : combinedFactors.entrySet()) {
-            int factor = entry.getKey();
-            int exponent = entry.getValue();
-            lcm *= Math.pow(factor, exponent);
-        }
-        return lcm;
-    }
-
-    private static Map<Integer, Integer> primeFactorization(int n) {
-        Map<Integer, Integer> factors = new HashMap<>();
-        for (int i = 2; i * i <= n; i++) {
-            while (n % i == 0) {
-                factors.put(i, factors.getOrDefault(i, 0) + 1);
-                n /= i;
-            }
-        }
-        if (n > 1) {
-            factors.put(n, factors.getOrDefault(n, 0) + 1);
-        }
-        return factors;
-    }
-}
+  }
+  
