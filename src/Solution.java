@@ -370,56 +370,100 @@
 
 // }
 
-import java.util.Arrays;
+// import java.util.Arrays;
+
+// class Solution {
+
+//     /**
+//      * @param a the number.
+//      * @param b the number.
+//      * @param c the number.
+//      * @return the pair of numbers - minimum and maximum from a, b, c
+//      */
+//     public static Pair getMinAndMax(int a, int b, int c) {
+//         int[] numbers = {a, b, c};
+//         Arrays.sort(numbers);
+//         int min = numbers[0];
+//         int max = numbers[numbers.length - 1];
+//         return new Pair(min, max);
+//     }
+
+// }
+
+
+// /**
+//  * Represents a pair of integers.
+//  * 
+//  * Do not change this class. 
+//  */
+// class Pair {
+
+// 	private int x0;
+
+// 	private int x1;
+
+// 	public Pair(int x0, int x1) {
+// 		this.x0 = x0;
+// 		this.x1 = x1;
+// 	}
+
+// 	public int getx0() {
+// 		return x0;
+// 	}
+
+// 	public int getX1() {
+// 		return x1;
+// 	}
+
+// 	@Override
+// 	public String toString() {
+// 		return String.format("(%d, %d)", x0, x1);
+// 	}
+
+// }
+import java.util.HashMap;
+import java.util.Map;
 
 class Solution {
-
     /**
-     * @param a the number.
-     * @param b the number.
-     * @param c the number.
-     * @return the pair of numbers - minimum and maximum from a, b, c
+     * @param a the first number.
+     * @param b the second number.
+     * @return the least common multiple of two given numbers
      */
-    public static Pair getMinAndMax(int a, int b, int c) {
-        int[] numbers = {a, b, c};
-        Arrays.sort(numbers);
-        int min = numbers[0];
-        int max = numbers[numbers.length - 1];
-        return new Pair(min, max);
+    public static int findLcm(int a, int b) {
+        return calculateLCM(a, b);
     }
 
+    private static int calculateLCM(int a, int b) {
+        Map<Integer, Integer> primeFactorsA = primeFactorization(a);
+        Map<Integer, Integer> primeFactorsB = primeFactorization(b);
+
+        // Union of prime factors
+        Map<Integer, Integer> combinedFactors = new HashMap<>(primeFactorsA);
+        primeFactorsB.forEach((factor, exponent) ->
+                combinedFactors.merge(factor, exponent, Math::max));
+
+        // Calculate LCM
+        int lcm = 1;
+        for (Map.Entry<Integer, Integer> entry : combinedFactors.entrySet()) {
+            int factor = entry.getKey();
+            int exponent = entry.getValue();
+            lcm *= Math.pow(factor, exponent);
+        }
+        return lcm;
+    }
+
+    private static Map<Integer, Integer> primeFactorization(int n) {
+        Map<Integer, Integer> factors = new HashMap<>();
+        for (int i = 2; i * i <= n; i++) {
+            while (n % i == 0) {
+                factors.put(i, factors.getOrDefault(i, 0) + 1);
+                n /= i;
+            }
+        }
+        if (n > 1) {
+            factors.put(n, factors.getOrDefault(n, 0) + 1);
+        }
+        return factors;
+    }
 }
-
-
-/**
- * Represents a pair of integers.
- * 
- * Do not change this class. 
- */
-class Pair {
-
-	private int x0;
-
-	private int x1;
-
-	public Pair(int x0, int x1) {
-		this.x0 = x0;
-		this.x1 = x1;
-	}
-
-	public int getx0() {
-		return x0;
-	}
-
-	public int getX1() {
-		return x1;
-	}
-
-	@Override
-	public String toString() {
-		return String.format("(%d, %d)", x0, x1);
-	}
-
-}
-
-
