@@ -256,100 +256,170 @@
 //   }
 // }
 
-import java.util.Scanner;
+// import java.util.Scanner;
 
-//declare a parameterized interface Higher
-interface Higher<T> {
-  boolean isHigher(T other);
-}
+// //declare a parameterized interface Higher
+// interface Higher<T> {
+//   boolean isHigher(T other);
+// }
 
-//update the class header
-class Product implements Higher<Product> {
+// //update the class header
+// class Product implements Higher<Product> {
 
-  private final String name;
-  private final int price;
+//   private final String name;
+//   private final int price;
 
-  public Product(String name, int price) {
-    super();
-    this.name = name;
-    this.price = price;
-  }
+//   public Product(String name, int price) {
+//     super();
+//     this.name = name;
+//     this.price = price;
+//   }
 
-  public Product(Scanner sc) {
-    name = sc.next();
-    price = sc.nextInt();
-  }
+//   public Product(Scanner sc) {
+//     name = sc.next();
+//     price = sc.nextInt();
+//   }
 
-  public int getPrice() {
-    return price;
-  }
+//   public int getPrice() {
+//     return price;
+//   }
 
-  @Override
-  public boolean isHigher(Product product) {
-    return name.compareTo(product.name) < 0;
-  }
+//   @Override
+//   public boolean isHigher(Product product) {
+//     return name.compareTo(product.name) < 0;
+//   }
 
-  @Override
-  public String toString() {
-    return "Product [name=" + name + ", price=" + price + "]";
-  }
-}
+//   @Override
+//   public String toString() {
+//     return "Product [name=" + name + ", price=" + price + "]";
+//   }
+// }
 
-//update the class header
-class Purchase implements Higher<Purchase> {
+// //update the class header
+// class Purchase implements Higher<Purchase> {
 
-  private final Product product;
-  private final int number;
+//   private final Product product;
+//   private final int number;
 
-  public Purchase(Product product, int number) {
-    super();
-    this.product = product;
-    this.number = number;
-  }
+//   public Purchase(Product product, int number) {
+//     super();
+//     this.product = product;
+//     this.number = number;
+//   }
 
-  public Purchase(Scanner sc) {
-    product = new Product(sc);
-    number = sc.nextInt();
-  }
+//   public Purchase(Scanner sc) {
+//     product = new Product(sc);
+//     number = sc.nextInt();
+//   }
 
-  public int getCost() {
-    return product.getPrice() * number;
-  }
+//   public int getCost() {
+//     return product.getPrice() * number;
+//   }
 
-  @Override
-  public boolean isHigher(Purchase purchase) {
-    return getCost() > purchase.getCost();
-  }
+//   @Override
+//   public boolean isHigher(Purchase purchase) {
+//     return getCost() > purchase.getCost();
+//   }
 
-  @Override
-  public String toString() {
-    return (
-      "Purchase [product=" +
-      product +
-      ", number=" +
-      number +
-      ", getCost()=" +
-      getCost() +
-      "]"
-    );
-  }
-}
+//   @Override
+//   public String toString() {
+//     return (
+//       "Purchase [product=" +
+//       product +
+//       ", number=" +
+//       number +
+//       ", getCost()=" +
+//       getCost() +
+//       "]"
+//     );
+//   }
+// }
+
+// class Solution {
+
+//   //declare a static method getHighest
+//   //that accepts an array of objects of the type parameter T
+//   //and returns the highest element of the array.
+//   public static <T extends Higher<T>> T getHighest(T[] array) {
+//     if (array.length == 0) {
+//       throw new IllegalArgumentException();
+//     }
+//     T highest = array[0];
+//     for (int i = 1; i < array.length; i++) {
+//       if (array[i].isHigher(highest)) {
+//         highest = array[i];
+//       }
+//     }
+//     return highest;
+//   }
+// }
+
+// import java.util.*;
+
+// public class Solution {
+//    public static void main(String[] args) {
+//       PriorityQueue<Integer> queue = new PriorityQueue<>(); 
+// for(int i = 0; i < 3; i++) 
+//     queue.add(i); 
+// queue.add(1); 
+// for(int i = 0; i < 3; i++) 
+//     System.out.print(queue.remove()); 
+// for(int i = 0; i < 1; i++) 
+//    System.out.print(queue.peek()); 
+//    }
+
+// }
+
+import java.util.Arrays;
 
 class Solution {
 
-  //declare a static method getHighest
-  //that accepts an array of objects of the type parameter T
-  //and returns the highest element of the array.
-  public static <T extends Higher<T>> T getHighest(T[] array) {
-    if (array.length == 0) {
-      throw new IllegalArgumentException();
+    /**
+     * @param a the number.
+     * @param b the number.
+     * @param c the number.
+     * @return the pair of numbers - minimum and maximum from a, b, c
+     */
+    public static Pair getMinAndMax(int a, int b, int c) {
+        int[] numbers = {a, b, c};
+        Arrays.sort(numbers);
+        int min = numbers[0];
+        int max = numbers[numbers.length - 1];
+        return new Pair(min, max);
     }
-    T highest = array[0];
-    for (int i = 1; i < array.length; i++) {
-      if (array[i].isHigher(highest)) {
-        highest = array[i];
-      }
-    }
-    return highest;
-  }
+
 }
+
+
+/**
+ * Represents a pair of integers.
+ * 
+ * Do not change this class. 
+ */
+class Pair {
+
+	private int x0;
+
+	private int x1;
+
+	public Pair(int x0, int x1) {
+		this.x0 = x0;
+		this.x1 = x1;
+	}
+
+	public int getx0() {
+		return x0;
+	}
+
+	public int getX1() {
+		return x1;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("(%d, %d)", x0, x1);
+	}
+
+}
+
+
